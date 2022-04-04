@@ -3,6 +3,7 @@ lib
 dist
 accounts
 .level
+data
 
 node_modules
 npm-debug.log
