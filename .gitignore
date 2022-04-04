@@ -2,6 +2,7 @@ logs
 lib
 dist
 accounts
+.level
 
 node_modules
 npm-debug.log
