@@ -3,8 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "koishi-plugin-*": ["plugins/*/src"],
-      "@*/koishi-plugin-*": ["plugins/*/src"],
+      "koishi-plugin-*": [
+        "plugins/*/src"
+      ],
     },
   },
 }
