@@ -20,3 +20,5 @@ tsconfig.temp.json
 *.ntvs*
 *.njsproj
 *.sln
+
+koishi.yml
