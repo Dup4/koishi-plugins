@@ -10,9 +10,10 @@ apt install -y \
   fonts-thai-tlwg \
   fonts-kacst \
   fonts-freefont-ttf \
-  fonts-bpg-georgia \
   libxss1 \
   --no-install-recommends
+
+# fonts-bpg-georgia \
 
 rm -rf /var/lib/apt/lists/*
 

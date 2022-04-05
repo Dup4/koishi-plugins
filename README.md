@@ -16,6 +16,7 @@ docker build -t koishi-bot -f docker/Dockerfile.dev ./
 ```bash
 docker run \
   -it \
+  -d \
   -p 8080:8080 \
   --name=koishi-bot \
   -v "${PWD}/data":/app/data \
