@@ -119,7 +119,6 @@ export function apply(ctx: Context, config: Config) {
       } catch (error) {
         page.close()
         logger.debug(error)
-        logger.error(error)
         return '无法打开页面。'
       }
 
