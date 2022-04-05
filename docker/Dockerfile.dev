@@ -5,7 +5,9 @@ WORKDIR /app/
 
 COPY package.json yarn.lock ./docker/docker_entry.sh ./docker/install.sh ./
 
-RUN bash install.sh \
+RUN sed -i s@/deb.debian.org/@/mirrors.ustc.edu.cn/@g /etc/apt/sources.list \
+  && sed -i s@/security.debian.org/@/mirrors.ustc.edu.cn/@g /etc/apt/sources.list \
+  && bash install.sh \
   && rm install.sh
 
 EXPOSE 8080
