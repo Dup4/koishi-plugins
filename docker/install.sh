@@ -13,6 +13,7 @@ apt install -y \
   libxss1 \
   --no-install-recommends
 
+# https://debian.pkgs.org/11/debian-main-arm64/fonts-bpg-georgian_2012-5_all.deb.html
 # fonts-bpg-georgia \
 
 rm -rf /var/lib/apt/lists/*
