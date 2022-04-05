@@ -71,8 +71,6 @@ export function apply(ctx: Context, config: Config) {
     .option('full', '-f  对整个可滚动区域截图')
     .option('viewport', '-v <viewport:string>  指定视口')
     .action(async ({ session, options }, url, selector) => {
-      console.log(url);
-      
       if (!url) return '请输入网址。'
       const scheme = /^(\w+):\/\//.exec(url)
       if (!scheme) {
@@ -121,6 +119,7 @@ export function apply(ctx: Context, config: Config) {
       } catch (error) {
         page.close()
         logger.debug(error)
+        logger.error(error)
         return '无法打开页面。'
       }
 
