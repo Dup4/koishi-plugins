@@ -138,6 +138,10 @@ export function apply(ctx: Context) {
     )
     .option("noBlockAds", "Disable ad blocking")
     .action(async ({ session, options }, url: string) => {
+      if (!url) {
+        return "Please enter URL";
+      }
+
       makeDefaultOptions(options);
 
       console.log(options);
