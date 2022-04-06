@@ -13,12 +13,12 @@ function makeDefaultOptions(options) {
     options.type = "png";
   }
 
-  // if (!options.quality) {
-  //   options.quality = 1;
-  // }
+  if (!options.quality && options.type !== "png") {
+    options.quality = 1;
+  }
 
-  if (!options["scale-factor"]) {
-    options["scale-factor"] = 2;
+  if (!options.scaleFactor) {
+    options.scaleFactor = 2;
   }
 
   if (!options.timeout) {
@@ -29,8 +29,8 @@ function makeDefaultOptions(options) {
     options.delay = 0;
   }
 
-  if (!options["disable-animations"]) {
-    options["disable-animations"] = false;
+  if (!options.disableAnimations) {
+    options.disableAnimations = false;
   }
 }
 
@@ -38,59 +38,65 @@ export function apply(ctx: Context) {
   ctx
     .command("capture-website <url>", "Capture Website", { authority: 2 })
     .alias("cw")
-    .option("output", "Image file path (writes it to stdout if omitted)")
-    .option("viewport", "-v ViewPort [default: 1280x800]")
-    .option("type", "Image type: png|jpeg|webp  [default: png]")
-    .option(
-      "quality",
-      "Image quality: 0...1 (Only for JPEG and WebP)  [default: 1]"
-    )
-    .option("scale-factor", "-s Scale the webpage `n` times  [default: 2]")
-    .option("list-devices", "Output a list of supported devices to emulate")
-    .option(
-      "emulate-device",
-      "Capture as if it were captured on the given device"
-    )
+    .option("viewport", "-v <viewport:string> ViewPort  [default: 1280x800]")
     .option(
       "fullPage",
       "-f Capture the full scrollable page, not just the viewport"
     )
-    .option("no-default-background", "Make the default background transparent")
+    .option("darkMode", "-d Emulate preference of dark color scheme")
+    .option("type", "<type:string> Image type: png|jpeg|webp  [default: png]")
+    .option(
+      "quality",
+      "-q <quality:number> Image quality: 0...1 (Only for JPEG and WebP)  [default: 1]"
+    )
+    .option(
+      "scaleFactor",
+      "-s <scaleFactor:number> Scale the webpage `n` times  [default: 2]"
+    )
+    .option("listDevices", "Output a list of supported devices to emulate")
+    .option(
+      "emulateDevice",
+      "Capture as if it were captured on the given device"
+    )
+    .option("noDefaultBackground", "Make the default background transparent")
     .option(
       "timeout",
-      "Seconds before giving up trying to load the page. Specify `0` to disable.  [default: 60]"
+      "<timeout:number> Seconds before giving up trying to load the page. Specify `0` to disable.  [default: 60]"
     )
     .option(
       "delay",
-      "Seconds to wait after the page finished loading before capturing the screenshot  [default: 0]"
+      "<delay:number> Seconds to wait after the page finished loading before capturing the screenshot  [default: 0]"
     )
     .option(
-      "wait-for-element",
-      "Wait for a DOM element matching the CSS selector to appear in the page and to be visible before capturing the screenshot"
+      "waitForElement",
+      "<waitForElement:string> Wait for a DOM element matching the CSS selector to appear in the page and to be visible before capturing the screenshot"
     )
     .option(
       "element",
-      "Capture the DOM element matching the CSS selector. It will wait for the element to appear in the page and to be visible."
+      "<element:string> Capture the DOM element matching the CSS selector. It will wait for the element to appear in the page and to be visible."
     )
     .option(
-      "hide-elements",
-      "Hide DOM elements matching the CSS selector (Can be set multiple times)"
+      "hideElements",
+      "<hideElements:string> Hide DOM elements matching the CSS selector (Can be set multiple times)"
     )
     .option(
-      "remove-elements",
-      "Remove DOM elements matching the CSS selector (Can be set multiple times)"
-    )
-    .option("click-element", "Click the DOM element matching the CSS selector")
-    .option(
-      "scroll-to-element",
-      "Scroll to the DOM element matching the CSS selector"
+      "removeElements",
+      "<removeElements:string> Remove DOM elements matching the CSS selector (Can be set multiple times)"
     )
     .option(
-      "disable-animations",
+      "clickElement",
+      "<clickElement:string> Click the DOM element matching the CSS selector"
+    )
+    .option(
+      "scrollToElement",
+      "<scrollToElement:string> Scroll to the DOM element matching the CSS selector"
+    )
+    .option(
+      "disableAnimations",
       "Disable CSS animations and transitions  [default: false]"
     )
     .option(
-      "no-javascript",
+      "noJavascript",
       "Disable JavaScript execution (does not affect --module/--script)"
     )
     .option(
@@ -99,32 +105,51 @@ export function apply(ctx: Context) {
     )
     .option(
       "script",
-      "Same as `--module`, but instead injects the code as a classic script"
+      "<script:string> Same as `--module`, but instead injects the code as a classic script"
     )
     .option(
       "style",
-      "Inject CSS styles into the page. Can be inline code, absolute URL, and local file path with `.css` extension. (Can be set multiple times)"
+      "<style:string> Inject CSS styles into the page. Can be inline code, absolute URL, and local file path with `.css` extension. (Can be set multiple times)"
     )
-    .option("header", "Set a custom HTTP header (Can be set multiple times)")
-    .option("user-agent", "Set the user agent")
-    .option("cookie", "Set a cookie (Can be set multiple times)")
-    .option("authentication", "Credentials for HTTP authentication")
-    .option("debug", "Show the browser window to see what it's doing")
-    .option("dark-mode", "-d Emulate preference of dark color scheme")
-    .option("launch-options", "Puppeteer launch options as JSON")
-    .option("overwrite", "Overwrite the destination file if it exists")
+    .option(
+      "header",
+      "<header:string> Set a custom HTTP header (Can be set multiple times)"
+    )
+    .option("userAgent", "<userAgent:string> Set the user agent")
+    .option(
+      "cookie",
+      "<cookie:string> Set a cookie (Can be set multiple times)"
+    )
+    .option(
+      "authentication",
+      "<authentication:string> Credentials for HTTP authentication"
+    )
+    .option(
+      "launchOptions",
+      "<launchOptions:string> Puppeteer launch options as JSON"
+    )
     .option(
       "inset",
-      "Inset the screenshot relative to the viewport or `--element`. Accepts a number or four comma-separated numbers for top, right, left, and bottom."
+      "<inset:string> Inset the screenshot relative to the viewport or `--element`. Accepts a number or four comma-separated numbers for top, right, left, and bottom."
     )
     .option(
       "clip",
-      "Position and size in the website (clipping region). Accepts comma-separated numbers for x, y, width, and height."
+      "<clip:string> Position and size in the website (clipping region). Accepts comma-separated numbers for x, y, width, and height."
     )
-    .option("no-block-ads", "Disable ad blocking")
+    .option("noBlockAds", "Disable ad blocking")
     .action(async ({ session, options }, url: string) => {
       makeDefaultOptions(options);
+
       console.log(options);
+
+      if (options.viewport) {
+        const viewport = options.viewport.split("x");
+        const width = +viewport[0];
+        const height = +viewport[1];
+        options.width = width;
+        options.height = height;
+      }
+
       return segment.image(await captureWebsite.buffer(url, options));
     });
 }
