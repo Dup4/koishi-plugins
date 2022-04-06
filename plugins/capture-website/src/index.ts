@@ -148,7 +148,6 @@ export function apply(ctx: Context) {
       }
 
       makeDefaultOptions(options);
-
       console.log(options);
 
       if (options.viewport) {
