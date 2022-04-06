@@ -139,7 +139,7 @@ export function apply(ctx: Context) {
     .option("noBlockAds", "Disable ad blocking")
     .action(async ({ session, options }, url: string) => {
       if (!url) {
-        return "Please enter URL";
+        return "Please enter URL.";
       }
 
       const scheme = /^(\w+):\/\//.exec(url);
@@ -159,6 +159,11 @@ export function apply(ctx: Context) {
         options.height = height;
       }
 
-      return segment.image(await captureWebsite.buffer(url, options));
+      try {
+        const image = await captureWebsite.buffer(url, options);
+        return segment.image(image);
+      } catch (error) {
+        return "capture website failed.";
+      }
     });
 }
