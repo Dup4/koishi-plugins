@@ -142,6 +142,11 @@ export function apply(ctx: Context) {
         return "Please enter URL";
       }
 
+      const scheme = /^(\w+):\/\//.exec(url);
+      if (!scheme) {
+        url = "http://" + url;
+      }
+
       makeDefaultOptions(options);
 
       console.log(options);
