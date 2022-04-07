@@ -75,7 +75,7 @@
     methods "^1.1.2"
     path-to-regexp "^6.1.0"
 
-"@koishijs/cli@^4.5.0":
+"@koishijs/cli@^4.5.1":
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/@koishijs/cli/-/cli-4.5.1.tgz#454491d0afdec1bd4f2091b4ab5f1e91749c822c"
   integrity sha512-rGsDELNNo4Fs5Zq0kWWyeVOCqu13IUILl9yWoINkqmUsg2X0uepNn3MqhRjnYO3shH/6aeVeT5Q3+ymflvwn1w==
@@ -256,7 +256,7 @@
   resolved "https://registry.yarnpkg.com/@koishijs/plugin-verifier/-/plugin-verifier-1.0.2.tgz#2de93c533a4cdee2de508df31394e670c33ccd2c"
   integrity sha512-8RXvJJJ/sbEEtA/3s5h7jqiRr1MTCHmDequBCICPridRogf3jAkmkiHdjFwC15TuK5I5LKE0MJyZTkONDNQvYg==
 
-"@koishijs/scripts@^1.2.3":
+"@koishijs/scripts@^1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@koishijs/scripts/-/scripts-1.3.0.tgz#a811d1e0a8bb8c6144e8ff3f5ed817f95f622c55"
   integrity sha512-VLx1R3CNFRfKxvTmJP+4iJan+1RB9W9fIAniblupsMjWSTJUxk/GhvDFuURfalxtxyarVbqbZAQ9lTBmL7HNgQ==
@@ -1905,7 +1905,7 @@ koishi-plugin-tex@1.1.0:
   resolved "https://registry.yarnpkg.com/koishi-plugin-tex/-/koishi-plugin-tex-1.1.0.tgz#64d2313a1b5f43e3313fb0b757323165b2cb868e"
   integrity sha512-FbXtItZ/tjV9GfCluI5PpXYDB5XRMm0Rk/R95/Zj4R8dNR0TZtlZhDEPvGZ2WViUWb0Dl3/qWjil9PRVrOhVoA==
 
-koishi@^4.5.0:
+koishi@^4.5.1:
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/koishi/-/koishi-4.5.1.tgz#c9725d46ea70d53c8e29377033f2d694bec169ca"
   integrity sha512-iYbziM1Ecm9VtWFe4knH9T3jeONzDK/bXmi4i7Qtt3V/jT1Ms0B4S+QVi5Mdd4XzIjlqGlUlEUT40D9y+BZP5Q==
@@ -2972,7 +2972,7 @@ tr46@~0.0.3:
   resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
   integrity sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=
 
-tsconfig-paths@^3.14.0:
+tsconfig-paths@^3.14.1:
   version "3.14.1"
   resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.14.1.tgz#ba0734599e8ea36c862798e920bcf163277b137a"
   integrity sha512-fxDhWnFSLt3VuTwtvJt5fpwxBHg5AdKWMsgcPOOIilyjymcYVZoCQF8fvFRezCNfblEXmi+PcM1eYHeOAgXCOQ==
@@ -3014,7 +3014,7 @@ type-is@^1.6.16:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
-typescript@^4.6.2:
+typescript@^4.6.3:
   version "4.6.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.3.tgz#eefeafa6afdd31d725584c67a0eaba80f6fc6c6c"
   integrity sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==

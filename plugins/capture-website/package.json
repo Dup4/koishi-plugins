@@ -16,7 +16,7 @@
     "plugin"
   ],
   "peerDependencies": {
-    "koishi": "^4.5.0"
+    "koishi": "^4.5.1"
   },
   "dependencies": {
     "capture-website": "^2.3.0"
