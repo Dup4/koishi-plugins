@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Context, segment, Logger } from "koishi";
+import { Context, Schema, segment, Logger } from "koishi";
 import captureWebsite from "capture-website";
 
 const logger = new Logger("capture-website");
@@ -9,6 +9,12 @@ if (process.env.NODE_ENV === "development") {
 }
 
 export const name = "capture-website";
+
+export interface Config {}
+
+export const Config: Schema<Config> = Schema.object({});
+
+export const using = [] as const;
 
 function makeDefaultOptions(options) {
   if (!options.viewport) {
