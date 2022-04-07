@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { Context, Schema, segment, Logger } from "koishi";
 import captureWebsite from "capture-website";
+import findChrome from "chrome-finder";
 
 const logger = new Logger("capture-website");
 
@@ -44,6 +45,9 @@ function makeDefaultOptions(options) {
   if (!options.disableAnimations) {
     options.disableAnimations = false;
   }
+
+  options.launchOptions = {};
+  options.launchOptions.executablePath = findChrome();
 }
 
 export function apply(ctx: Context) {
