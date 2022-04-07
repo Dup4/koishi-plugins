@@ -1,6 +1,12 @@
 // @ts-nocheck
-import { Context, segment } from "koishi";
+import { Context, segment, Logger } from "koishi";
 import captureWebsite from "capture-website";
+
+const logger = new Logger("capture-website");
+
+if (process.env.NODE_ENV === "development") {
+  logger.level = Logger.DEBUG;
+}
 
 export const name = "capture-website";
 
@@ -148,7 +154,7 @@ export function apply(ctx: Context) {
       }
 
       makeDefaultOptions(options);
-      console.log(options);
+      logger.debug(`capture-website options:`, options);
 
       if (options.viewport) {
         const viewport = options.viewport.split("x");
@@ -162,6 +168,7 @@ export function apply(ctx: Context) {
         const image = await captureWebsite.buffer(url, options);
         return segment.image(image);
       } catch (error) {
+        logger.debug(error);
         return "capture website failed.";
       }
     });
