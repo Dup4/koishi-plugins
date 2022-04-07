@@ -1,8 +1,6 @@
 // @ts-nocheck
 import { Context, segment, Logger } from "koishi";
-
-let captureWebsite = require("capture-website");
-captureWebsite = captureWebsite.default;
+import captureWebsite from "capture-website";
 
 const logger = new Logger("capture-website");
 
