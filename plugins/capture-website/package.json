@@ -1,19 +1,28 @@
 {
   "name": "koishi-plugin-capture-website",
   "description": "Capture screenshots of websites",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
-    "lib",
-    "dist"
+    "lib"
   ],
+  "author": "Dup4 <lyuzhi.pan@gmail.com>",
   "license": "MIT",
-  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dup4/koishi-plugins.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Dup4/koishi-plugins/issues"
+  },
   "keywords": [
+    "bot",
     "chatbot",
     "koishi",
-    "plugin"
+    "plugin",
+    "screenshot",
+    "capture-website"
   ],
   "peerDependencies": {
     "koishi": "^4.5.1"
