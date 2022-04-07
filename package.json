@@ -15,7 +15,8 @@
     "new": "koishi-scripts new",
     "pub": "koishi-scripts pub",
     "dev": "cross-env NODE_ENV=development koishi start -r esbuild-register -r yaml-register -r tsconfig-paths/register --watch",
-    "start": "koishi start"
+    "start": "koishi start",
+    "publish": "koishi-scripts publish"
   },
   "devDependencies": {
     "@koishijs/cli": "^4.5.1",
@@ -48,7 +49,7 @@
     "@koishijs/plugin-status": "^5.3.4",
     "@koishijs/plugin-verifier": "1.0.2",
     "koishi": "^4.5.1",
-    "koishi-plugin-capture-website": "1.0.0",
+    "koishi-plugin-capture-website": "^1.1.0",
     "koishi-plugin-oeis": "2.0.2",
     "koishi-plugin-tex": "1.1.0"
   }
