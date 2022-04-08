@@ -50,7 +50,7 @@ function makeDefaultOptions(options) {
   options.launchOptions.executablePath = findChrome();
 }
 
-export function apply(ctx: Context) {
+export function apply(ctx: Context, config: Config) {
   ctx
     .command("capture-website <url>", "Capture Website", { authority: 2 })
     .alias("cw")
@@ -139,10 +139,6 @@ export function apply(ctx: Context) {
     .option(
       "authentication",
       "<authentication:string> Credentials for HTTP authentication"
-    )
-    .option(
-      "launchOptions",
-      "<launchOptions:string> Puppeteer launch options as JSON"
     )
     .option(
       "inset",
