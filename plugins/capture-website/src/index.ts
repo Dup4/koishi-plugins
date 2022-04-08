@@ -11,15 +11,41 @@ if (process.env.NODE_ENV === "development") {
 
 export const name = "capture-website";
 
-export interface Config {}
+interface BrowserConfig {
+  defaultViewport: {
+    width: number;
+    height: number;
+  };
+  proxyServer?: string;
+}
 
-export const Config: Schema<Config> = Schema.object({});
+export interface Config {
+  browser: BrowserConfig;
+}
+
+export const Config: Schema<Config> = Schema.object({
+  browser: Schema.object({
+    defaultViewport: Schema.object({
+      width: Schema.natural().description("默认的视图宽度。").default(1280),
+      height: Schema.natural().description("默认的视图高度。").default(800),
+      deviceScaleFactor: Schema.number()
+        .min(0)
+        .description("默认的设备缩放比率。")
+        .default(2),
+    }),
+    proxyServer: Schema.string().description("使用的代理服务器的地址"),
+  }).description("浏览器设置"),
+});
 
 export const using = [] as const;
 
-function makeDefaultOptions(options) {
+function makeOptions(options, config: Config) {
   if (!options.viewport) {
-    options.viewport = "1280x800";
+    options.viewport = `${config.browser.defaultViewport.width}x${config.browser.defaultViewport.height}`;
+  }
+
+  if (!options.scaleFactor) {
+    options.scaleFactor = config.browser.defaultViewport.deviceScaleFactor;
   }
 
   if (!options.type) {
@@ -28,10 +54,6 @@ function makeDefaultOptions(options) {
 
   if (!options.quality && options.type !== "png") {
     options.quality = 1;
-  }
-
-  if (!options.scaleFactor) {
-    options.scaleFactor = 2;
   }
 
   if (!options.timeout) {
@@ -46,15 +68,32 @@ function makeDefaultOptions(options) {
     options.disableAnimations = false;
   }
 
-  options.launchOptions = {};
-  options.launchOptions.executablePath = findChrome();
+  options.launchOptions = {
+    args: [],
+    executablePath: findChrome(),
+    defaultViewport: config.browser.defaultViewport,
+  };
+
+  if (config.browser.proxyServer) {
+    options.launchOptions.args.push(
+      `--proxy-server=${config.browser.proxyServer}`
+    );
+  }
+
+  if (options.viewport) {
+    const viewport = options.viewport.split("x");
+    const width = +viewport[0];
+    const height = +viewport[1];
+    options.width = width;
+    options.height = height;
+  }
 }
 
 export function apply(ctx: Context, config: Config) {
   ctx
     .command("capture-website <url>", "Capture Website", { authority: 2 })
     .alias("cw")
-    .option("viewport", "-v <viewport:string> ViewPort  [default: 1280x800]")
+    .option("viewport", "-v <viewport:string> ViewPort")
     .option(
       "fullPage",
       "-f Capture the full scrollable page, not just the viewport"
@@ -156,19 +195,11 @@ export function apply(ctx: Context, config: Config) {
 
       const scheme = /^(\w+):\/\//.exec(url);
       if (!scheme) {
-        url = "http://" + url;
+        url = "https://" + url;
       }
 
-      makeDefaultOptions(options);
+      makeOptions(options, config);
       logger.debug(`capture-website options:`, options);
-
-      if (options.viewport) {
-        const viewport = options.viewport.split("x");
-        const width = +viewport[0];
-        const height = +viewport[1];
-        options.width = width;
-        options.height = height;
-      }
 
       try {
         const image = await captureWebsite.buffer(url, options);
