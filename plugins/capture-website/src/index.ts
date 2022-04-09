@@ -15,6 +15,7 @@ interface BrowserConfig {
   defaultViewport: {
     width: number;
     height: number;
+    deviceScaleFactor: number;
   };
   proxyServer?: string;
 }
@@ -28,6 +29,7 @@ export const defaultConfig = {
     defaultViewport: {
       width: 1280,
       height: 800,
+      deviceScaleFactor: 2,
     },
   },
 } as Config;
@@ -141,11 +143,12 @@ export async function render(
   }
 
   makeOptions(options, config);
-  logger.debug(`capture-website options:`, options);
 
   if (!isUrl(urlOrContent)) {
     options.inputType = "html";
   }
+
+  logger.debug(`capture-website options:`, options);
 
   try {
     const image = await captureWebsite.buffer(urlOrContent, options);
@@ -266,7 +269,7 @@ export function apply(ctx: Context, config: Config) {
       }
 
       try {
-        const image = await render(url, options);
+        const image = await render(url, options, config);
         return segment.image(image);
       } catch (error) {
         return error.message;
