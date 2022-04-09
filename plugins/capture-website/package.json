@@ -1,7 +1,7 @@
 {
   "name": "koishi-plugin-capture-website",
   "description": "Capture screenshots of websites",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -28,7 +28,7 @@
     "koishi": "^4.5.1"
   },
   "dependencies": {
-    "capture-website": "^2.3.0",
+    "capture-website": "github:Dup4/capture-website#b2121327d9696b25efc4d12eeb82a56cc67c82fa",
     "chrome-finder": "^1.0.7"
   }
 }
