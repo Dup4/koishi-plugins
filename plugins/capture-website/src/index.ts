@@ -23,11 +23,24 @@ export interface Config {
   browser: BrowserConfig;
 }
 
+export const defaultConfig = {
+  browser: {
+    defaultViewport: {
+      width: 1280,
+      height: 800,
+    },
+  },
+} as Config;
+
 export const Config: Schema<Config> = Schema.object({
   browser: Schema.object({
     defaultViewport: Schema.object({
-      width: Schema.natural().description("默认的视图宽度。").default(1280),
-      height: Schema.natural().description("默认的视图高度。").default(800),
+      width: Schema.natural()
+        .description("默认的视图宽度。")
+        .default(defaultConfig.browser.defaultViewport.width),
+      height: Schema.natural()
+        .description("默认的视图高度。")
+        .default(defaultConfig.browser.defaultViewport.height),
       deviceScaleFactor: Schema.number()
         .min(0)
         .description("默认的设备缩放比率。")
@@ -39,7 +52,36 @@ export const Config: Schema<Config> = Schema.object({
 
 export const using = [] as const;
 
-function makeOptions(options, config: Config) {
+export interface Options {
+  viewport?: string;
+  fullPage?: boolean;
+  darkMode?: boolean;
+  type?: "png" | "jpeg" | "webp";
+  quality?: number;
+  scaleFactor?: number;
+  timeout?: number;
+  delay?: number;
+  waitForElement?: string;
+  element?: string;
+  hideElements?: string;
+  removeElements?: string;
+  clickElement?: string;
+  scrollToElement?: string;
+  disableAnimations?: boolean;
+  noJavascript?: boolean;
+  script?: string;
+  style?: string;
+  header?: string;
+  userAgent?: string;
+  cookie?: string;
+  authentication?: string;
+  clip?: string;
+  inset?: string;
+}
+
+const isUrl = (s: string) => /^(https?|file):\/\/|^data:/.test(s);
+
+function makeOptions(options: Options, config: Config) {
   if (!options.viewport) {
     options.viewport = `${config.browser.defaultViewport.width}x${config.browser.defaultViewport.height}`;
   }
@@ -86,6 +128,31 @@ function makeOptions(options, config: Config) {
     const height = +viewport[1];
     options.width = width;
     options.height = height;
+  }
+}
+
+export async function render(
+  urlOrContent: string,
+  options: Options,
+  config?: Config
+): Promise<Buffer> {
+  if (!config) {
+    config = defaultConfig;
+  }
+
+  makeOptions(options, config);
+  logger.debug(`capture-website options:`, options);
+
+  if (!isUrl(urlOrContent)) {
+    options.inputType = "html";
+  }
+
+  try {
+    const image = await captureWebsite.buffer(urlOrContent, options);
+    return image;
+  } catch (error) {
+    logger.debug(error);
+    throw new Error("capture website failed.");
   }
 }
 
@@ -198,15 +265,11 @@ export function apply(ctx: Context, config: Config) {
         url = "https://" + url;
       }
 
-      makeOptions(options, config);
-      logger.debug(`capture-website options:`, options);
-
       try {
-        const image = await captureWebsite.buffer(url, options);
+        const image = await render(url, options);
         return segment.image(image);
       } catch (error) {
-        logger.debug(error);
-        return "capture website failed.";
+        return error.message;
       }
     });
 }
