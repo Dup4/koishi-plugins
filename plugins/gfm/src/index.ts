@@ -12,9 +12,13 @@ if (process.env.NODE_ENV === "development") {
 
 export const using = [] as const;
 
-export interface Config {}
+export interface Config {
+  mirrorUrl?: string;
+}
 
-export const Config: Schema<Config> = Schema.object({});
+export const Config: Schema<Config> = Schema.object({
+  mirrorUrl: Schema.string().description("使用的 GitHub API 镜像地址"),
+}).description("网络设置");
 
 const htmlBody = `
 <!doctype html>
@@ -67,7 +71,13 @@ export function apply(ctx: Context, config: Config) {
       mdOptions.viewport = "800x80";
       mdOptions.fullPage = true;
 
-      const html = await ctx.http.post("https://api.github.com/markdown", {
+      let githubAPIUrl = "https://api.github.com";
+
+      if (config.mirrorUrl) {
+        githubAPIUrl = config.mirrorUrl;
+      }
+
+      const html = await ctx.http.post(`${githubAPIUrl}/markdown`, {
         text: content,
       });
 
