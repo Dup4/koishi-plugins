@@ -1,0 +1,25 @@
+{
+  "name": "koishi-plugin-gfm",
+  "description": "GitHub Flavored Markdown Render",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "license": "MIT",
+  "scripts": {},
+  "keywords": [
+    "chatbot",
+    "koishi",
+    "plugin"
+  ],
+  "peerDependencies": {
+    "koishi": "^4.5.1"
+  },
+  "dependencies": {
+    "koishi-plugin-capture-website": "^1.5.4",
+    "querystring": "^0.2.1"
+  }
+}

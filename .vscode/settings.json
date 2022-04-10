@@ -6,6 +6,7 @@
     "esbuild",
     "koishi",
     "koishijs",
-    "onebot"
+    "onebot",
+    "rawtext"
   ]
 }
