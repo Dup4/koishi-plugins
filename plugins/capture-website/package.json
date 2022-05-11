@@ -11,11 +11,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dup4/koishi-plugins.git"
+    "url": "git+https://github.com/Dup4/koishi-plugins.git",
+    "directory": "plugins/capture-website"
   },
   "bugs": {
     "url": "https://github.com/Dup4/koishi-plugins/issues"
   },
+  "homepage": "https://github.com/Dup4/koishi-plugins/plugins/capture-website#readme",
   "keywords": [
     "bot",
     "chatbot",

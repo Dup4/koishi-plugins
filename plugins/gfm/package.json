@@ -9,6 +9,15 @@
     "dist"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dup4/koishi-plugins.git",
+    "directory": "plugins/gfm"
+  },
+  "bugs": {
+    "url": "https://github.com/Dup4/koishi-plugins/issues"
+  },
+  "homepage": "https://github.com/Dup4/koishi-plugins/plugins/gfm#readme",
   "scripts": {},
   "keywords": [
     "chatbot",
