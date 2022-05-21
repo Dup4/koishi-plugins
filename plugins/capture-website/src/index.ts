@@ -154,7 +154,7 @@ export async function render(
     const image = await captureWebsite.buffer(urlOrContent, options);
     return image;
   } catch (error) {
-    logger.debug(error);
+    logger.error(error);
     throw new Error("capture website failed.");
   }
 }
