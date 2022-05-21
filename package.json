@@ -57,7 +57,7 @@
     "@koishijs/plugin-status": "^5.3.4",
     "@koishijs/plugin-verifier": "1.0.2",
     "koishi": "^4.5.1",
-    "koishi-plugin-capture-website": "^1.5.4",
+    "koishi-plugin-capture-website": "^1.5.5",
     "koishi-plugin-gfm": "^1.0.1",
     "koishi-plugin-oeis": "2.0.2",
     "koishi-plugin-tex": "1.1.0"

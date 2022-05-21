@@ -28,7 +28,7 @@
     "koishi": "^4.5.1"
   },
   "dependencies": {
-    "koishi-plugin-capture-website": "^1.5.4",
+    "koishi-plugin-capture-website": "^1.5.5",
     "querystring": "^0.2.1"
   }
 }
