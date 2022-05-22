@@ -934,9 +934,9 @@ call-bind@^1.0.0:
     function-bind "^1.1.1"
     get-intrinsic "^1.0.2"
 
-"capture-website@github:Dup4/capture-website#b2121327d9696b25efc4d12eeb82a56cc67c82fa":
-  version "2.3.0"
-  resolved "https://codeload.github.com/Dup4/capture-website/tar.gz/b2121327d9696b25efc4d12eeb82a56cc67c82fa"
+"capture-website@github:Dup4/capture-website#004581bcfd8ea13b1dff79ed5a1d8e6770cfafb3":
+  version "2.4.0"
+  resolved "https://codeload.github.com/Dup4/capture-website/tar.gz/004581bcfd8ea13b1dff79ed5a1d8e6770cfafb3"
   dependencies:
     "@cliqz/adblocker-puppeteer" "^1.23.2"
     file-url "^4.0.0"

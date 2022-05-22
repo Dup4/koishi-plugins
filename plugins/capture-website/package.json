@@ -30,7 +30,7 @@
     "koishi": "^4.5.1"
   },
   "dependencies": {
-    "capture-website": "github:Dup4/capture-website#b2121327d9696b25efc4d12eeb82a56cc67c82fa",
+    "capture-website": "github:Dup4/capture-website#004581bcfd8ea13b1dff79ed5a1d8e6770cfafb3",
     "chrome-finder": "^1.0.7"
   }
 }
